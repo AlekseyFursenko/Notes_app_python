@@ -8,7 +8,6 @@ import view
 # новая книга заметок список
 def new_notes_book():
     notes_book = []
-    #clear_csv()
     return notes_book
 
 
@@ -58,7 +57,6 @@ def export_to_csv(notes_book: list):
     csv_file = Path.cwd() / 'notes.csv'
 
     with open(csv_file, 'w', newline='') as csv_file:
-        # field_names = ['id', 'Name', 'Surname', 'Phone_number', 'Description']
         field_names = view.get_fields_names()
         writer = csv.DictWriter(csv_file, fieldnames=field_names, delimiter=";")
 

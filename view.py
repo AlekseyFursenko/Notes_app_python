@@ -9,7 +9,6 @@ def get_fields_names():
     heads = ['id']
     for item in FIELDS_NAMES:
         heads.append(item)
-    # print(heads)
     return heads
 
 

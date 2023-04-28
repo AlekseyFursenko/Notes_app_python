@@ -12,15 +12,6 @@ def show_ui():
     ui.start()
 
 
-# def add_new_phonebook():
-#     global phone_book
-#     if phone_book == False:
-#         view.warning_delete_phonebook()
-
-#     phone_book = database_ops.new_phone_book()
-#     return phone_book
-
-
 def start(notes_book):
     show_ui()
     get_option(notes_book)
@@ -79,7 +70,6 @@ def get_option(notes_book):
             notes_on_date = []
             for item in notes_book:
                 date_time_obj = datetime.datetime.strptime(item[headers[3]], '%Y-%m-%d %H:%M:%S.%f')
-                #print(date_time_obj.date())
                 if date_time_obj.date() == date:
                     notes_on_date.append(item)
             view.print_notes(notes_on_date)
