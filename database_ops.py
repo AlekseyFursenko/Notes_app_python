@@ -8,13 +8,12 @@ import view
 # новая книга заметок список
 def new_notes_book():
     notes_book = []
-    clear_csv()
+    #clear_csv()
     return notes_book
 
 
 # загрузка предыдущей базы данных
-def import_from_csv(notes_book: list):
-
+def import_from_csv(notes_book):
     path = Path.cwd() / 'notes.csv'
 
     if not os.path.exists(path):

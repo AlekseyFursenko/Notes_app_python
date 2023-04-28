@@ -1,3 +1,5 @@
+import datetime
+
 import database_ops
 import ui
 import view
@@ -25,10 +27,13 @@ def start(notes_book):
 
 
 def get_option(notes_book):
+
     var = int(view.get_variant())
+
     match var:
-        case 1:  # создать новую книгу заметок
-            notes_book = database_ops.new_notes_book()
+        case 1:  # просмотр заметки
+            id_view = str(view.get_id("Choose note's id number you want to view - "))
+            note_ops.show_note(notes_book, id_view)
             return start(notes_book)
 
         case 2:  # добавить новую заметку
@@ -37,8 +42,6 @@ def get_option(notes_book):
 
         case 3:  # редактировать заметку
             id_edit = str(view.get_id("Choose id number your want to edit - "))
-            # answer = view.get_confirmation('Are you sure? (y/n)')
-            # if answer == 'y' or answer == 'Y':
             note_ops.edit_note(notes_book, id_edit)
             return start(notes_book)
 
@@ -58,14 +61,30 @@ def get_option(notes_book):
             return start(notes_book)
 
         case 7:  # загрузить импорт из csv
+            notes_book =[]
             database_ops.import_from_csv(notes_book)
             return start(notes_book)
 
-        # case 8:
-        #     export.export_to_json(notes_book)
-        #
-        # case 9:
-        #     import_to.import_from_json(notes_book)
+        case 8:  # создать новую книгу заметок
+            view.warning_delete_notes_book()
+            answer = view.get_confirmation('Are you sure?')
+            if answer == 'y' or answer == 'Y':
+                notes_book = database_ops.new_notes_book()
+
+            return start(notes_book)
+
+        case 9:  # заметки на выбранную дату
+            date = view.get_date()
+            headers = view.get_fields_names()
+            notes_on_date = []
+            for item in notes_book:
+                date_time_obj = datetime.datetime.strptime(item[headers[3]], '%Y-%m-%d %H:%M:%S.%f')
+                #print(date_time_obj.date())
+                if date_time_obj.date() == date:
+                    notes_on_date.append(item)
+            view.print_notes(notes_on_date)
+
+            return start(notes_book)
 
         case 0:
             database_ops.export_to_csv(notes_book)
@@ -76,4 +95,5 @@ def get_option(notes_book):
         case _:
             print('Input another variant!!')
             get_option(notes_book)
+
 

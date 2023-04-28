@@ -1,3 +1,4 @@
+import datetime as DT
 from datetime import datetime
 
 FIELDS_NAMES = ['Note_name', 'Note_text', 'Date_create', 'Date_last_edit']
@@ -33,13 +34,12 @@ def edit_note_data(note):
             data = input(f"Input new {FIELDS_NAMES[i]}:")
             note[FIELDS_NAMES[i]] = data
 
-    note[FIELDS_NAMES[3]] = str(datetime.today())
+    note[FIELDS_NAMES[3]] = datetime.today()
     return note
 
 
 def warning_delete_notes_book():
-    print("У вас есть записи в текущей книге и они будут удалены!!!")
-    input()
+    print("You have records in the current notes book and they will be deleted!!!")
 
 
 def print_notes(notes_book):
@@ -55,10 +55,12 @@ def print_notes(notes_book):
 
 def show_note(note):
     global FIELDS_NAMES
-    print(
-        f"ID: {note['id']}  {FIELDS_NAMES[0]}: {note[FIELDS_NAMES[0]]}  {FIELDS_NAMES[2]}: {note[FIELDS_NAMES[2]]}  {FIELDS_NAMES[3]}: {note[FIELDS_NAMES[3]]}")
-    print(f"Note:     {note[FIELDS_NAMES[1]]}")
-    input()
+    print(f"ID: {note['id']}  {FIELDS_NAMES[0]}: {note[FIELDS_NAMES[0]]} ")
+    print(f"{FIELDS_NAMES[2]}: {note[FIELDS_NAMES[2]]:.16}  {FIELDS_NAMES[3]}: {note[FIELDS_NAMES[3]]:.16}")
+    print(f"Note:  {note[FIELDS_NAMES[1]]}")
+    print()
+
+    input('Press any key to continue')
 
 
 def get_variant():
@@ -66,7 +68,7 @@ def get_variant():
     while var == '':
 
         try:
-            var = input("Choose your variant - ")
+            var = int(input("Choose your variant - "))
         except ValueError:
             print("Input a variant.")
 
@@ -91,7 +93,7 @@ def get_confirmation(text):
         case "y" | "Y" | "n" | "N":
             return a
         case _:
-            return get_confirmation('Input y or n')
+            return get_confirmation('Input y or n - ')
 
 
 def get_value():
@@ -103,4 +105,14 @@ def get_value():
         except ValueError:
             print("Input a value.")
 
+
+def get_date():
+
+    while True:
+        try:
+            date_input = input("Print the date of note create (dd/mm/YYYY) - ", )
+            date_note = DT.datetime.strptime(date_input, '%d/%m/%Y').date()
+            return date_note
+        except ValueError:
+            print('Input the date in the yyyy/mm/dd format (example 12/04/2023)')
 

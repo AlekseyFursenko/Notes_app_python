@@ -36,12 +36,16 @@ def edit_note(notes_book, id_edit):
         if item['id'] == id_edit:
             view.edit_note_data(item)
             return notes_book
+
     print(f'No such note with id {id_edit} exist. Try another one.')
     return notes_book
 
 
 # показать заметку
-def show_note(notes_book: list, id):
+def show_note(notes_book, id_view):
     for item in notes_book:
-        if item['id'] == id:
+        if item['id'] == id_view:
             item = view.show_note(item)
+            return notes_book
+
+    print(f'No such note with id {id_view} exist. Try another one.')
