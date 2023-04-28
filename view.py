@@ -43,10 +43,10 @@ def warning_delete_notes_book():
 
 def print_notes(notes_book):
     global FIELDS_NAMES
-    print(f"ID  {FIELDS_NAMES[0]}          {FIELDS_NAMES[2]}         {FIELDS_NAMES[3]}")
+    print(f"ID  {FIELDS_NAMES[0]}              {FIELDS_NAMES[2]}         {FIELDS_NAMES[3]}")
     for item in notes_book:
         print(
-            f"{item['id']}   {item[FIELDS_NAMES[0]]:16.12} {item[FIELDS_NAMES[2]]:17.16}    {item[FIELDS_NAMES[3]]:.16}")
+            f"{item['id']}   {item[FIELDS_NAMES[0]]:16.12}     {str(item[FIELDS_NAMES[2]]):17.16}    {str(item[FIELDS_NAMES[3]]):.16}")
         print(f"Note: {item[FIELDS_NAMES[1]]}")
         print()
     input('Press any key to continue')
@@ -113,5 +113,5 @@ def get_date():
             date_note = DT.datetime.strptime(date_input, '%d/%m/%Y').date()
             return date_note
         except ValueError:
-            print('Input the date in the yyyy/mm/dd format (example 12/04/2023)')
+            print('Input the date in the dd/mm/YYYY format (example 12/04/2023)')
 

@@ -37,7 +37,7 @@ def get_option(notes_book):
             return start(notes_book)
 
         case 4:  # удалить контакт
-            id = int(view.get_id("Choose id number your want to delete from notes book - "))
+            id = str(view.get_id("Choose id number your want to delete from notes book - "))
             answer = view.get_confirmation('Are you sure?')
             if answer == 'y' or answer == 'Y':
                 note_ops.delete_note(notes_book, id)
